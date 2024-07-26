@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Napoleon Total War Game Randomizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>NTW Teams & Maps Randomizer</h1>
+        <div class="game-mode">
+            <label for="mode">Select Game Mode:</label>
+            <select id="mode" onchange="updatePlayerInputs()">
+                <option value="1v1">1 player versus 1 player</option>
+                <option value="2v2">2 players versus 2 players</option>
+                <option value="3v3">3 players versus 3 players</option>
+            </select>
+        </div>
+        <div id="players"></div>
+        <button onclick="randomize()">Randomize!</button>
+        <button id="revengeButton" onclick="revenge()" disabled>Revenge!</button>
+        <div class="result" id="result"></div>
+        <div class="map-image" id="mapImage"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
