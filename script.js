@@ -29,7 +29,7 @@ const mapImages = {
     "Siberian Plateau": "images/siberian_plateau.png",
     "Sunken Jungle": "images/sunken_jungle.jpg",
     "Syrian Ridge": "images/syrian_ridge.jpg",
-    "Pyramids": "images/pyramids.jpg",
+    "Pyramids": "images/Pyramids.jpg",
     "Spanish Lakeside": "images/spanish_lakeside.jpg",
     "Tabuk Mesa": "images/tabuk_mesa.jpg"
 };
