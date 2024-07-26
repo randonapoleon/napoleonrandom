@@ -123,7 +123,7 @@ function startTimer() {
     const timerElement = document.getElementById('timer');
     timerElement.innerText = "01:00";
 
-    timerInterval = setInterval(() => {
+    timerInterval = setInterval((1) => {
         timer--;
         const minutes = String(Math.floor(timer / 60)).padStart(2, '0');
         const seconds = String(timer % 60).padStart(2, '0');
