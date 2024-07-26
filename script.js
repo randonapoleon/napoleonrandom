@@ -14,24 +14,24 @@ const maps2v2Only = [
 ];
 
 const mapImages = {
-    "Amazon Confluence": "amazon_confluence.jpg",
-    "Aosta Valley": "aosta_valley.jpg",
-    "Arid Cliffs": "arid_cliffs.jpg",
-    "Austrian Pinnacles": "austrian_pinnacles.jpg",
-    "Galician Ria": "galician_ria.jpg",
-    "Grassy Flatlands": "grassy_flatlands.jpg",
-    "Homestead": "homestead.jpg",
-    "Italian Grassland": "italian_grassland.jpg",
-    "Prussian Hills": "prussian_hills.jpg",
-    "Pyrenees Peak": "pyrenees_peak.jpg",
-    "Salamanca Province": "salamanca_province.jpg",
-    "Savoy Hilltop": "savoy_hilltop.jpg",
-    "Siberian Plateau": "siberian_plateau.png",
-    "Sunken Jungle": "sunken_jungle.jpg",
-    "Syrian Ridge": "syrian_ridge.jpg",
-    "Pyramids": "pyramids.jpg",
-    "Spanish Lakeside": "spanish_lakeside.jpg",
-    "Tabuk Mesa": "tabuk_mesa.jpg"
+    "Amazon Confluence": "images/amazon_confluence.jpg",
+    "Aosta Valley": "images/aosta_valley.jpg",
+    "Arid Cliffs": "images/arid_cliffs.jpg",
+    "Austrian Pinnacles": "images/austrian_pinnacles.jpg",
+    "Galician Ria": "images/galician_ria.jpg",
+    "Grassy Flatlands": "images/grassy_flatlands.jpg",
+    "Homestead": "images/homestead.jpg",
+    "Italian Grassland": "images/italian_grassland.jpg",
+    "Prussian Hills": "images/prussian_hills.jpg",
+    "Pyrenees Peak": "images/pyrenees_peak.jpg",
+    "Salamanca Province": "images/salamanca_province.jpg",
+    "Savoy Hilltop": "images/savoy_hilltop.jpg",
+    "Siberian Plateau": "images/siberian_plateau.png",
+    "Sunken Jungle": "images/sunken_jungle.jpg",
+    "Syrian Ridge": "images/syrian_ridge.jpg",
+    "Pyramids": "images/pyramids.jpg",
+    "Spanish Lakeside": "images/spanish_lakeside.jpg",
+    "Tabuk Mesa": "images/tabuk_mesa.jpg"
 };
 
 let playerNames = [];
