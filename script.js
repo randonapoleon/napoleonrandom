@@ -17,7 +17,7 @@ const mapImages = {
     "Amazon Confluence": "images/amazon_confluence.jpg",
     "Aosta Valley": "images/aosta_valley.jpg",
     "Arid Cliffs": "images/arid_cliffs.jpg",
-    "Austrian Pinnacles": "images/austrian_pinnacles.jpg",
+    "Austrian Pinnacles": "images/austrian_pinnacle.jpg",
     "Galician Ria": "images/galician_ria.jpg",
     "Grassy Flatlands": "images/grassy_flatlands.jpg",
     "Homestead": "images/homestead.jpg",
@@ -37,6 +37,7 @@ const mapImages = {
 let playerNames = [];
 let randomizedTeams = [];
 let mode = '1v1';
+let timerInterval;
 
 function updatePlayerInputs() {
     mode = document.getElementById('mode').value;
