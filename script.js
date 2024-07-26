@@ -17,7 +17,7 @@ const mapImages = {
     "Amazon Confluence": "images/amazon_confluence.jpg",
     "Aosta Valley": "images/aosta_valley.jpg",
     "Arid Cliffs": "images/arid_cliffs.jpg",
-    "Austrian Pinnacles": "images/austrian_pinnacle.jpg",
+    "Austrian Pinnacles": "images/austrian_pinnacles.jpg",
     "Galician Ria": "images/galician_ria.jpg",
     "Grassy Flatlands": "images/grassy_flatlands.jpg",
     "Homestead": "images/homestead.jpg",
@@ -135,5 +135,6 @@ function startTimer() {
         }
     }, 1000);
 }
+
 // Initialize player inputs for the default game mode
 updatePlayerInputs();
