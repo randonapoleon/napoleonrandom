@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Napoleon Total War: Teams Randomizer</h1>
+        <h1>Napoleon Total War: Game Randomizer</h1> 
         <div class="game-mode">
             <select id="mode">
                 <option value="1v1">1v1</option>
@@ -28,6 +28,12 @@
         <div id="result" class="result"></div>
         <div id="mapImage" class="map-image"></div>
         <div id="clock" class="clock"></div>
+        <div class="timer">
+            <div id="timerDisplay">01:00</div>
+            <button id="startTimerButton">Start Timer</button>
+            <button id="resetTimerButton">Reset Timer</button>
+        </div>
+        <audio id="timerSound" src="path/to/sound.mp3"></audio>
     </div>
 
     <script src="script.js"></script>
@@ -35,6 +41,8 @@
         document.getElementById('randomizeButton').addEventListener('click', randomize);
         document.getElementById('mode').addEventListener('change', updatePlayerInputs);
         document.getElementById('revengeButton').addEventListener('click', revenge);
+        document.getElementById('startTimerButton').addEventListener('click', startTimer);
+        document.getElementById('resetTimerButton').addEventListener('click', resetTimer);
     </script>
 </body>
 </html>
