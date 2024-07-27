@@ -8,6 +8,12 @@ body {
     background-image: url('background.jpg'); /* Reference to local image file */
     background-size: cover;
     background-position: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
 }
 
 .container {
@@ -17,6 +23,11 @@ body {
     text-align: center;
     max-width: 800px;
     width: 100%;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode .container {
+    background-color: rgba(18, 18, 18, 0.8);
 }
 
 .game-mode {
@@ -34,6 +45,12 @@ body {
 
 button {
     margin: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode button {
+    background-color: #333333;
+    color: #ffffff;
 }
 
 .map-image {
@@ -47,8 +64,11 @@ button {
     border: 2px solid #ddd;
 }
 
-.timer {
-    font-size: 2em;
+body.dark-mode .map-image img {
+    border: 2px solid #444444;
+}
+
+.clock {
     margin-top: 20px;
-    font-weight: bold;
+    font-size: 18px;
 }
