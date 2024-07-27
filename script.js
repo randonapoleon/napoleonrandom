@@ -1,18 +1,7 @@
-const factions = [
-    "France", "Spain", "Great Britain", "Portugal", "Sweden", "Ottoman Empire", 
-    "Denmark", "Austria", "Russia", "Prussia", "Netherlands"
-];
-const maps = [
-    "Amazon Confluence", "Aosta Valley", "Arid Cliffs", "Austrian Pinnacles", 
-    "Galician Ria", "Grassy Flatlands", "Homestead", "Italian Grassland", 
-    "Prussian Hills", "Pyrenees Peak", "Salamanca Province", 
-    "Savoy Hilltop", "Siberian Plateau", "Sunken Jungle", 
-    "Syrian Ridge"
-];
-const maps2v2Only = [
-    "Pyramids", "Spanish Lakeside", "Tabuk Mesa"
-];
-
+const factions = ["France", "Spain", "Great Britain", "Portugal", "Sweden", "Ottoman Empire", "Denmark", "Austria", "Russia", "Prussia", "Netherlands"];
+const maps = ["Amazon Confluence", "Aosta Valley", "Arid Cliffs", "Austrian Pinnacles", "Galician Ria", "Grassy Flatlands", "Homestead", "Italian Grassland", "Prussian Hills", "Pyrenees Peak", "Salamanca Province", "Savoy Hilltop", "Siberian Plateau", "Sunken Jungle", "Syrian Ridge"];
+const maps2v2Only = ["Pyramids", "Spanish Lakeside", "Tabuk Mesa", "Amazon Confluence", "Aosta Valley", "Arid Cliffs", "Austrian Pinnacles", "Galician Ria", "Grassy Flatlands", "Homestead", "Italian Grassland", "Prussian Hills", "Pyrenees Peak", "Salamanca Province", "Savoy Hilltop", "Siberian Plateau", "Sunken Jungle", "Syrian Ridge"];
+const maps1v1Only = ["Pyramids", "Spanish Lakeside", "Tabuk Mesa", "Amazon Confluence", "Aosta Valley", "Arid Cliffs", "Austrian Pinnacles", "Galician Ria", "Grassy Flatlands", "Homestead", "Italian Grassland", "Prussian Hills", "Pyrenees Peak", "Salamanca Province", "Savoy Hilltop", "Siberian Plateau", "Sunken Jungle", "Syrian Ridge"];
 const mapImages = {
     "Amazon Confluence": "images/amazon_confluence.jpg",
     "Aosta Valley": "images/aosta_valley.jpg",
@@ -29,7 +18,7 @@ const mapImages = {
     "Siberian Plateau": "images/siberian_plateau.png",
     "Sunken Jungle": "images/sunken_jungle.jpg",
     "Syrian Ridge": "images/syrian_ridge.jpg",
-    "Pyramids": "images/Pyramids.jpg",
+    "Pyramids": "images/pyramids.jpg",
     "Spanish Lakeside": "images/spanish_lakeside.jpg",
     "Tabuk Mesa": "images/tabuk_mesa.jpg"
 };
@@ -37,7 +26,6 @@ const mapImages = {
 let playerNames = [];
 let randomizedTeams = [];
 let mode = '1v1';
-let timerInterval;
 
 function updatePlayerInputs() {
     mode = document.getElementById('mode').value;
@@ -74,9 +62,9 @@ function getPlayerNames() {
 }
 
 function randomize() {
+    Math.seedrandom(new Date().getTime().toString()); // Seed RNG
     getPlayerNames();
-    shuffle(playerNames);
-    randomizedTeams = [...playerNames];
+    randomizedTeams = rotateArray(multipleShuffle(playerNames));
     displayResults();
     document.getElementById('revengeButton').disabled = false;
 }
@@ -90,11 +78,11 @@ function displayResults() {
     const mapImageDiv = document.getElementById('mapImage');
     const numPlayers = mode === '1v1' ? 2 : mode === '2v2' ? 4 : 6;
     let availableMaps = [...maps];
-    if (mode === '2v2') {
-        availableMaps = availableMaps.concat(maps2v2Only);
-    }
+    if (mode === '2v2') availableMaps = availableMaps.concat(maps2v2Only);
+    else if (mode === '1v1') availableMaps = availableMaps.concat(maps1v1Only);
     const randomMap = availableMaps[Math.floor(Math.random() * availableMaps.length)];
-    const selectedFactions = shuffle(factions.slice()).slice(0, numPlayers);
+    const noCivilWar = document.getElementById('noCivilWarCheckbox').checked;
+    const selectedFactions = selectFactions(numPlayers, noCivilWar);
 
     let resultText = `Randomized Map: ${randomMap}\n\n`;
     for (let i = 0; i < numPlayers / 2; i++) {
@@ -109,6 +97,31 @@ function displayResults() {
     mapImageDiv.innerHTML = `<img src="${mapImages[randomMap]}" alt="${randomMap}">`;
 }
 
+function selectFactions(numPlayers, noCivilWar) {
+    const shuffledFactions = shuffle(factions.slice());
+    if (!noCivilWar || numPlayers <= 2) {
+        return shuffledFactions.slice(0, numPlayers);
+    }
+    const team1Factions = shuffledFactions.slice(0, numPlayers / 2);
+    const team2Factions = shuffledFactions.slice(numPlayers / 2, numPlayers);
+    while (team1Factions.some(faction => team2Factions.includes(faction))) {
+        shuffle(team2Factions);
+    }
+    return team1Factions.concat(team2Factions);
+}
+
+function multipleShuffle(array, times = 3) {
+    for (let i = 0; i < times; i++) {
+        shuffle(array);
+    }
+    return array;
+}
+
+function rotateArray(array) {
+    const rotateBy = Math.floor(Math.random() * array.length);
+    return array.slice(rotateBy).concat(array.slice(0, rotateBy));
+}
+
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -117,24 +130,20 @@ function shuffle(array) {
     return array;
 }
 
-function startTimer() {
-    clearInterval(timerInterval);
-    let timer = 60;
-    const timerElement = document.getElementById('timer');
-    timerElement.innerText = "01:00";
-
-    timerInterval = setInterval(() => {
-        timer--;
-        const minutes = String(Math.floor(timer / 60)).padStart(2, '0');
-        const seconds = String(timer % 60).padStart(2, '0');
-        timerElement.innerText = `${minutes}:${seconds}`;
-
-        if (timer <= 0) {
-            clearInterval(timerInterval);
-            timerElement.innerText = "Time's up!";
-        }
-    }, 1000);
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
 }
 
-// Initialize player inputs for the default game mode
-updatePlayerInputs();
+function updateClock() {
+    const clockDiv = document.getElementById('clock');
+    const now = new Date();
+    const hours = now.getUTCHours().toString().padStart(2, '0');
+    const minutes = now.getUTCMinutes().toString().padStart(2, '0');
+    const seconds = now.getUTCSeconds().toString().padStart(2, '0');
+    clockDiv.innerText = `UTC Time: ${hours}:${minutes}:${seconds}`;
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    updatePlayerInputs();
+    setInterval(updateClock, 1000);
+});
