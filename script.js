@@ -26,6 +26,7 @@ const mapImages = {
 let playerNames = [];
 let randomizedTeams = [];
 let mode = '1v1';
+let timerInterval;
 
 function updatePlayerInputs() {
     mode = document.getElementById('mode').value;
@@ -141,6 +142,26 @@ function updateClock() {
     const minutes = now.getUTCMinutes().toString().padStart(2, '0');
     const seconds = now.getUTCSeconds().toString().padStart(2, '0');
     clockDiv.innerText = `UTC Time: ${hours}:${minutes}:${seconds}`;
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    let timeRemaining = 60;
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, '0');
+        const seconds = (timeRemaining % 60).toString().padStart(2, '0');
+        document.getElementById('timerDisplay').innerText = `${minutes}:${seconds}`;
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById('timerSound').play();
+        }
+    }, 1000);
+}
+
+function resetTimer() {
+    clearInterval(timerInterval);
+    document.getElementById('timerDisplay').innerText = "01:00";
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
