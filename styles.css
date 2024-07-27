@@ -72,3 +72,13 @@ body.dark-mode .map-image img {
     margin-top: 20px;
     font-size: 18px;
 }
+
+.timer {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#timerDisplay {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
