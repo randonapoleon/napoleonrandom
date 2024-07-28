@@ -1,10 +1,11 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    overflow: hidden;
     background-image: url('background.jpg'); /* Reference to local image file */
     background-size: cover;
     background-position: center;
@@ -23,6 +24,8 @@ body.dark-mode {
     text-align: center;
     max-width: 800px;
     width: 100%;
+    height: 100%;
+    overflow: auto;
     transition: background-color 0.3s, color 0.3s;
 }
 
