@@ -65,7 +65,7 @@ function getPlayerNames() {
 function randomize() {
     Math.seedrandom(new Date().getTime().toString()); // Seed RNG
     getPlayerNames();
-    randomizedTeams = rotateArray(multipleShuffle(playerNames));
+    randomizedTeams = shuffle([...playerNames]); // Ensure players are shuffled
     displayResults();
     document.getElementById('revengeButton').disabled = false;
 }
@@ -109,18 +109,6 @@ function selectFactions(numPlayers, noCivilWar) {
         shuffle(team2Factions);
     }
     return team1Factions.concat(team2Factions);
-}
-
-function multipleShuffle(array, times = 3) {
-    for (let i = 0; i < times; i++) {
-        shuffle(array);
-    }
-    return array;
-}
-
-function rotateArray(array) {
-    const rotateBy = Math.floor(Math.random() * array.length);
-    return array.slice(rotateBy).concat(array.slice(0, rotateBy));
 }
 
 function shuffle(array) {
