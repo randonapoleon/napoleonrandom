@@ -1,7 +1,7 @@
 const factions = ["France", "Spain", "Great Britain", "Portugal", "Sweden", "Ottoman Empire", "Denmark", "Austria", "Russia", "Prussia", "Netherlands"];
 const maps = ["Amazon Confluence", "Aosta Valley", "Arid Cliffs", "Austrian Pinnacles", "Galician Ria", "Grassy Flatlands", "Homestead", "Italian Grassland", "Prussian Hills", "Pyrenees Peak", "Salamanca Province", "Savoy Hilltop", "Siberian Plateau", "Sunken Jungle", "Syrian Ridge"];
-const maps2v2Only = ["Pyramids", "Spanish Lakeside", "Tabuk Mesa", "Amazon Confluence", "Aosta Valley", "Arid Cliffs", "Austrian Pinnacles", "Galician Ria", "Grassy Flatlands", "Homestead", "Italian Grassland", "Prussian Hills", "Pyrenees Peak", "Salamanca Province", "Savoy Hilltop", "Siberian Plateau", "Sunken Jungle", "Syrian Ridge"];
-const maps1v1Only = ["Pyramids", "Spanish Lakeside", "Tabuk Mesa", "Amazon Confluence", "Aosta Valley", "Arid Cliffs", "Austrian Pinnacles", "Galician Ria", "Grassy Flatlands", "Homestead", "Italian Grassland", "Prussian Hills", "Pyrenees Peak", "Salamanca Province", "Savoy Hilltop", "Siberian Plateau", "Sunken Jungle", "Syrian Ridge"];
+const maps2v2Only = ["Pyramids", "Spanish Lakeside", "Tabuk Mesa"];
+const maps1v1Only = ["Pyramids", "Spanish Lakeside", "Tabuk Mesa"];
 const mapImages = {
     "Amazon Confluence": "images/amazon_confluence.jpg",
     "Aosta Valley": "images/aosta_valley.jpg",
@@ -27,6 +27,7 @@ let playerNames = [];
 let randomizedTeams = [];
 let mode = '1v1';
 let timerInterval;
+let previousMap = null; // Variable to store the previously selected map
 
 function updatePlayerInputs() {
     mode = document.getElementById('mode').value;
@@ -81,7 +82,14 @@ function displayResults() {
     let availableMaps = [...maps];
     if (mode === '2v2') availableMaps = availableMaps.concat(maps2v2Only);
     else if (mode === '1v1') availableMaps = availableMaps.concat(maps1v1Only);
+
+    // Remove the previously selected map from the available maps
+    if (previousMap) {
+        availableMaps = availableMaps.filter(map => map !== previousMap);
+    }
+
     const randomMap = availableMaps[Math.floor(Math.random() * availableMaps.length)];
+    previousMap = randomMap; // Store the selected map as the previous map
     const noCivilWar = document.getElementById('noCivilWarCheckbox').checked;
     const selectedFactions = selectFactions(numPlayers, noCivilWar);
 
